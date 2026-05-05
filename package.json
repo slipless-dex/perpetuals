@@ -1,0 +1,14 @@
+{
+  "name": "@slipless/perpetuals",
+  "version": "0.2.0",
+  "description": "Solidity perpetual-futures engine for Slipless. Position bookkeeping, funding accrual, liquidations.",
+  "license": "MIT",
+  "author": "Slipless Labs",
+  "homepage": "https://slipless.xyz",
+  "repository": { "type": "git", "url": "git+https://github.com/slipless-dex/perpetuals.git" },
+  "files": ["src", "foundry.toml", "remappings.txt", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "forge build",
+    "test": "forge test -vv"
+  }
+}

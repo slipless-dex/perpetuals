@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 80" width="120" height="80">
+  <defs>
+    <!-- Prismatic gradient with all six brand hues -->
+    <linearGradient id="ringGrad" x1="0" y1="0" x2="120" y2="80" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#5cd8ff" />
+      <stop offset="20%"  stop-color="#a0ffd2" />
+      <stop offset="40%"  stop-color="#ffe7d6" />
+      <stop offset="60%"  stop-color="#ff6bdb" />
+      <stop offset="80%"  stop-color="#b965ff" />
+      <stop offset="100%" stop-color="#5cd8ff" />
+    </linearGradient>
+    <!-- Top-only sheen -->
+    <linearGradient id="ringHi" x1="0" y1="20" x2="0" y2="50" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#ffffff" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </linearGradient>
+    <!-- Outer glow -->
+    <filter id="ringGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" />
+    </filter>
+  </defs>
+
+  <!-- The mark: a tilted lemniscate (figure-8 / infinity).
+       Path traces left lobe then right lobe, returning to center.
+       Italic tilt: -14° around the center (60,40). -->
+  <g transform="rotate(-14 60 40)">
+    <!-- Soft outer glow halo, prismatic blurred -->
+    <path
+      d="M 60 40
+         C 60 22  18 22  18 40
+         C 18 58  60 58  60 40
+         C 60 22  102 22  102 40
+         C 102 58  60 58  60 40 Z"
+      fill="none"
+      stroke="url(#ringGrad)"
+      stroke-width="14"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      opacity="0.45"
+      filter="url(#ringGlow)"
+    />
+    <!-- Main prismatic stroke -->
+    <path
+      d="M 60 40
+         C 60 22  18 22  18 40
+         C 18 58  60 58  60 40
+         C 60 22  102 22  102 40
+         C 102 58  60 58  60 40 Z"
+      fill="none"
+      stroke="url(#ringGrad)"
+      stroke-width="9"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <!-- Top-arc highlight for sheen — only on the upper hemisphere -->
+    <path
+      d="M 60 40
+         C 60 22  18 22  18 40
+         M 60 40
+         C 60 22  102 22  102 40"
+      fill="none"
+      stroke="url(#ringHi)"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      opacity="0.9"
+    />
+    <!-- Tiny center pivot dot — anchors the brand mark, like the dot on Stripe's S terminals -->
+    <circle cx="60" cy="40" r="2.4" fill="#ffffff" opacity="0.95" />
+  </g>
+</svg>
