@@ -14,23 +14,12 @@ interface IPerpEngineView {
     function markets(bytes32) external view returns (Market memory);
 }
 
-/**
- * @title Liquidator
- * @notice Permissionless liquidation entry point. Anyone can call
- *         `liquidate(account, marketId)`; if the position is below MMF
- *         under the supplied oracle price, this contract closes it via
- *         the LimitOrderProtocol path and pays the caller a rebate.
- *
- *         The actual close happens through a normal `fill` against a
- *         signed maker order on the opposite side — this contract only
- *         performs the gating check.
- */
 contract Liquidator {
     error PositionHealthy();
     error MarketHalted();
 
     IPerpEngineView public immutable engine;
-    /// @notice Rebate paid to the caller on a successful liquidation, bps of margin.
+    /// @notice Rebate paid on liquidation, bps of margin.
     uint256 public immutable rebateBps;
 
     constructor(address engine_, uint256 rebateBps_) {
@@ -38,7 +27,7 @@ contract Liquidator {
         rebateBps = rebateBps_;
     }
 
-    function isLiquidatable(address account, bytes32 marketId, uint256 markPrice) public view returns (bool) {
+    function isLiquidatable(address account, bytes32 marketId, uint256 markPrice) external view returns (bool) {
         IPerpEngineView.Position memory p = engine.positions(account, marketId);
         if (p.size == 0) return false;
         IPerpEngineView.Market memory m = engine.markets(marketId);
